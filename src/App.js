@@ -1,20 +1,24 @@
 import './App.css';
-import React from 'react';
-import { useState,useEffect } from 'react';
-function App() {
+import React, {useState, useEffect} from 'react';
 
-  useEffect(()=>{
+function App() {
+  const [randomContent, setRandomContent] = useState({});
+
+  useEffect(() => {
     fetch("https://countriesnow.space/api/v0.1/countries/flag/images")
-    .then(res=>res.json)
-    .then(json=>{
-        
-    })
-  })
+      .then((response) => response.json())
+      .then((data) =>{
+        const randomIndex = Math.floor(Math.random() * data.data.length); // Generate a random index
+        const randomContent = data.data[randomIndex];
+        setRandomContent(randomContent);
+      } )
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-          
-      </header>
+    <div>
+        <img src={randomContent.flag}></img>
+          {console.log(randomContent)}
     </div>
   );
 }
