@@ -17,10 +17,21 @@ function App() {
 
   return (
     <div>
-        <img src={randomContent.flag}></img>
+        <img id='foto' src={randomContent.flag}></img>
           {console.log(randomContent)}
+          <form>
+            <label>Que pais es?</label>
+            <input type={"text"}id="username"></input>
+          </form>
+          <button onclick= {saveUsername()} >Save username</button>
+
     </div>
+
   );
+  function saveUsername() {
+    const username = document.getElementById("username").value;
+    localStorage.setItem("username", username);
+  }  
 }
 
 export default App;
